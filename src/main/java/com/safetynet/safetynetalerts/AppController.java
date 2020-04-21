@@ -12,4 +12,28 @@ public class AppController {
         
         return "index";
     }
+    
+    @RequestMapping("/actuator/health") // Mapping needed for Cucumber
+    public String showHealthActuator(Model model) {
+        
+        return "actuator/health";
+    }
+    
+    @RequestMapping("/actuator/info") // Mapping needed for Cucumber
+    public String showInfoActuator(Model model) {
+        
+        return "actuator/info";
+    }
+    
+    @RequestMapping("/actuator/metrics") // Mapping needed for Cucumber
+    public String showMetricsActuator(Model model) {
+        
+        return "actuator/metrics";
+    }
+    
+    @RequestMapping("/actuator/httptrace") // Mapping needed for Cucumber
+    public String showHttptraceActuator(Model model) {
+        
+        return "actuator/httptrace";
+    }
 }

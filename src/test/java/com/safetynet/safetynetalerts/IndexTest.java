@@ -10,9 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT) //classes = AppController.class
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class IndexTest {
-
+    
     @LocalServerPort
     private int port; // Inject the RANDOM_PORT into that variable
     
