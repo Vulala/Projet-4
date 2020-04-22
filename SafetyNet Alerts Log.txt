@@ -1,0 +1,2 @@
+22/04/2020 11:00:43 INFO: Request of : / com.safetynet.safetynetalerts.AppController.viewHomePage()
+22/04/2020 11:00:44 INFO: Request of : / com.safetynet.safetynetalerts.AppController.viewHomePage()

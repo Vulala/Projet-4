@@ -11,7 +11,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class IndexTest {
+public class ErrorControllerTest {
     
     @LocalServerPort
     private int port; // Inject the RANDOM_PORT into that variable
@@ -29,9 +29,10 @@ public class IndexTest {
         assertThat(controller).isNotNull();
     }
     
-    @DisplayName("The index page is correctly showed when going on the application")
+    @DisplayName("The error page is correctly showed when an wrong URL is set")
     @Test
-    public void givenTheAppStart_whenGoingOnIt_thenTheIndexPageIsShown() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/", String.class)).contains("Index");
+    public void givenTheAppStart_whenGoingOnAWrongURL_thenTheErrorPageIsShown() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/ThisIsAWrongURL", String.class))
+                .contains("This is the Error Page");
     }
 }

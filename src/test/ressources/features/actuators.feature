@@ -53,3 +53,11 @@ Feature: We can access the Health/Info/Metrics/Trace actuators
     Then I can see that the Httptrace endpoint is up and working
     And Showing proper Httptrace informations
     
+  @ReleaseNotes
+  Scenario: We want to be able to access the notes of the different release via an actuator
+    Given The server start
+    #And The actuators are set up
+    When I go on the ReleaseNotes path endpoint
+    Then I can see that the ReleaseNotes endpoint is up and working
+    And Showing proper ReleaseNotes informations
+    

@@ -85,4 +85,19 @@ public class ActuatorsSteps {
         mockMvc.perform(get("/actuator/httptrace")).andExpect(forwardedUrl("actuator/httptrace"));
     }
     
+    // RELEASE NOTES
+    @When("I go on the ReleaseNotes path endpoint")
+    public void i_go_on_the_ReleaseNotes_path_endpoint() throws Exception {
+        mockMvc.perform(get("/actuator/release-notes")).andExpect(status().isOk());
+    }
+    
+    @Then("I can see that the ReleaseNotes endpoint is up and working")
+    public void i_can_see_that_the_ReleaseNotes_endpoint_is_up_and_working() throws Exception {
+        mockMvc.perform(get("/actuator/release-notes")).andExpect(status().is2xxSuccessful());
+    }
+    
+    @Then("Showing proper ReleaseNotes informations")
+    public void showing_proper_ReleaseNotes_informations() throws Exception {
+        mockMvc.perform(get("/actuator/release-notes")).andExpect(forwardedUrl("actuator/release-notes"));
+    }
 }

@@ -56,4 +56,19 @@ public class ActuatorTest {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/actuator/httptrace", String.class))
                 .contains("response").contains("200");
     }
+    
+    @DisplayName("The ReleaseNotes endpoint page contains the notes of the different release ")
+    @Test
+    public void givenTheAppStart_whenGoingOnTheReleaseNotesEndpoint_thenReleaseNotesAreShown() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/actuator/release-notes", String.class))
+                .contains("Version 1.1").contains("Requested Actuators enabled");
+    }
+    
+    @DisplayName("We can access to a specific release notes by using the version as id parameter")
+    @Test
+    public void givenTheAppStart_whenGoingOnASpecificReleaseNotesEndpointUsingTheVersionAsParameter_thenTheReleaseNotesOfThatVersionIsShown()
+            throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/actuator/release-notes/1.1.1",
+                String.class)).contains("Version 1.1.1").contains("Add of this Release notes endpoint");
+    }
 }
