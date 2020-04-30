@@ -1,11 +1,12 @@
 package cucumber.steps;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -28,7 +29,8 @@ public class IndexSteps {
     
     @Then("I see the index page")
     public void i_see_the_index_page() throws Exception {
-        mockMvc.perform(get("/")).andExpect(content().string(""));
+        mockMvc.perform(MockMvcRequestBuilders.get("/"))
+                .andExpect(MockMvcResultMatchers.header().stringValues("Index"));
     }
     
 }

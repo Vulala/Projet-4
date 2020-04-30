@@ -6,7 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.safetynet.safetynetalerts.AppController;
+import com.safetynet.safetynetalerts.controller.AppController;
 
 import io.cucumber.spring.CucumberContextConfiguration;
 
@@ -16,4 +16,5 @@ import io.cucumber.spring.CucumberContextConfiguration;
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
 public class CucumberStepsContextConfiguration {
+    
 }

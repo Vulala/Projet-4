@@ -9,8 +9,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class SafetyNetAlertsApplication {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         SpringApplication.run(SafetyNetAlertsApplication.class, args);
+        JSONReader.readJSON();
     }
     
     @Bean
@@ -18,5 +19,10 @@ public class SafetyNetAlertsApplication {
     // Since Spring Boot 2.2
     public HttpTraceRepository httpTraceRepository() {
         return new InMemoryHttpTraceRepository();
+    }
+    
+    @Bean
+    public JSONReader jsonReaderBean() {
+        return new JSONReader();
     }
 }

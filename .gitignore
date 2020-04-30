@@ -11,7 +11,7 @@ target/
 .project
 .settings
 .springBeans
-.sts4-cache
+.sts4-cache.checkstyle.eclipse-pmd
 
 ### IntelliJ IDEA ###
 .idea
@@ -28,4 +28,4 @@ target/
 build/
 
 ### VS Code ###
-.vscode/
+.vscode/### Log ###/*.txt

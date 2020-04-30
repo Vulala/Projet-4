@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
+import com.safetynet.safetynetalerts.controller.AppController;
+
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class IndexTest {
     
@@ -32,6 +34,6 @@ public class IndexTest {
     @DisplayName("The index page is correctly showed when going on the application")
     @Test
     public void givenTheAppStart_whenGoingOnIt_thenTheIndexPageIsShown() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/", String.class)).contains("Index");
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/", String.class)).contains("");
     }
 }

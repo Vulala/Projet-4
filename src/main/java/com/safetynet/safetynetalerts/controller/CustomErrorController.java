@@ -1,4 +1,4 @@
-package com.safetynet.safetynetalerts;
+package com.safetynet.safetynetalerts.controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;

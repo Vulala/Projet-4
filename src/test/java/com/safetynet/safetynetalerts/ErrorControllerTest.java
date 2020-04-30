@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 
+import com.safetynet.safetynetalerts.controller.AppController;
+
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ErrorControllerTest {
     
