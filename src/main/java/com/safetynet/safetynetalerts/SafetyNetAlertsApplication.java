@@ -6,6 +6,8 @@ import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.safetynet.safetynetalerts.model.JSONDataObject;
+
 @SpringBootApplication
 public class SafetyNetAlertsApplication {
     
@@ -24,5 +26,10 @@ public class SafetyNetAlertsApplication {
     @Bean
     public JSONReader jsonReaderBean() {
         return new JSONReader();
+    }
+    
+    @Bean
+    public JSONDataObject jsonDataObject() {
+        return new JSONDataObject();
     }
 }

@@ -1,10 +1,11 @@
-/**package cucumber.steps;
+package cucumber.steps;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -15,7 +16,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class PersonEndpointSteps {
+@Ignore
+public class EndpointCRUDSteps {
     
     @Autowired
     private MockMvc mockMvc;
@@ -28,8 +30,9 @@ public class PersonEndpointSteps {
     @When("I create a new <person>")
     public void i_create_a_new_person() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/person")
-                .content(asJsonString(
-                        new person("firstNameA", "lastNameA", "addressA", "cityA", "zip1", "phone1", "emailA@A")))
+                // .content(asJsonString(
+                // new Person("firstNameA", "lastNameA", "addressA", "cityA", 456456,
+                // "phone1", "emailA@A")))
                 .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
     }
@@ -43,8 +46,9 @@ public class PersonEndpointSteps {
     @When("I update a <person>")
     public void i_update_a_person() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.put("/person/{firstName&lastName}", "firstNameB&lastNameB")
-                .content(asJsonString(
-                        new person("firstNameB", "lastNameB", "addressB", "cityB", "zip2", "phone2", "emailB@B")))
+                // .content(asJsonString(
+                // new Person("firstNameB", "lastNameB", "addressB", "cityB", 123123,
+                // "phone2", "emailB@B")))
                 .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
     }
     
@@ -70,4 +74,3 @@ public class PersonEndpointSteps {
         mockMvc.perform(get("/person/{firstName&lastName}", "firstNameB&lastNameB")).andExpect(status().isNotFound());
     }
 }
-*/

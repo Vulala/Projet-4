@@ -17,13 +17,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.tinylog.Logger;
 
 import com.safetynet.safetynetalerts.dao.PersonDAO;
+import com.safetynet.safetynetalerts.model.JSONDataObject;
 import com.safetynet.safetynetalerts.model.Person;
 
 @RestController
 public class AppController {
     
     @Autowired
-    private PersonDAO personDao;
+    private JSONDataObject jsonDataObject;
     
     @RequestMapping("/")
     public String viewHomePage() {
@@ -62,12 +63,12 @@ public class AppController {
     }
     
     @GetMapping(value = "/person")
-    public Person listPerson() {
+    public List<JSONDataObject> listPerson() {
         Logger.info("GET request of : /person");
-        return personDao.findAll();
+        return jsonDataObject.jsonDataObject();
     }
     
-    @GetMapping(value = "/person/{firstName}") // /!\
+    /** @GetMapping(value = "/person/{firstName}") // /!\
     public Person showPersonById(@PathVariable String firstName) {
         Logger.info("GET request of : /person/{firstName}");
         return personDao.findById(firstName);
@@ -94,6 +95,6 @@ public class AppController {
     public void deletePerson(@PathVariable String firstName) {
         Logger.info("DELETE request of : /person/{firstName}");
         personDao.deleteById(firstName);
-    }
+    }*/
     
 }

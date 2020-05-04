@@ -7,6 +7,6 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/ressources/features", plugin = { "pretty", "html:target/html-cucumber-report" })
-public class PersonEndpointAT {
+public class EndpointsCRUDAT {
     // Acceptance test to fulfill the endpointsCRUD.feature file.
 }
