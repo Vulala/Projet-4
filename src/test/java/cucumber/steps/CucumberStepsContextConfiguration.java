@@ -6,13 +6,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.safetynet.safetynetalerts.controller.AppController;
+import com.safetynet.safetynetalerts.SafetyNetAlertsApplication;
 
 import io.cucumber.spring.CucumberContextConfiguration;
 
 @Ignore
 @CucumberContextConfiguration // Allow the other class to use this class as setup
-@SpringBootTest(classes = AppController.class)
+@SpringBootTest(classes = SafetyNetAlertsApplication.class)
 @AutoConfigureMockMvc
 @RunWith(SpringRunner.class)
 public class CucumberStepsContextConfiguration {

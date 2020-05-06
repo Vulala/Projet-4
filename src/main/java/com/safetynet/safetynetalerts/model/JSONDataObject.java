@@ -3,11 +3,11 @@ package com.safetynet.safetynetalerts.model;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.safetynet.safetynetalerts.JSONReader;
 import com.safetynet.safetynetalerts.model.Person;
 
-@Component
 public class JSONDataObject {
     
     private Person person;

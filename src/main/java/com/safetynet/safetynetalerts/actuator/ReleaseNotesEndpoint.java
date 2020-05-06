@@ -16,12 +16,11 @@ public class ReleaseNotesEndpoint {
     String version1_1_1 = "Version 1.1.1 \n\n" + "-Add of this Release notes endpoint\n\n";
     String version1_2 = "Version 1.2 \n\n" + "-Add of a Custom ErrorController\n"
             + "-Logger implementation with tinylog\n\n";
-    
-    String version1_3 = "Version 1.3 \n\n" + "-Endpoints CRUD added\n\n";
+    String version1_3 = "Version 1.3 \n\n" + "-Endpoints CRUD added\n" + "So are the tests related to it\n\n";
     
     @ReadOperation
     public String releaseNote() {
-        return version1_3 + version1_2 + version1_1_1 + version1_1 + version1_0;
+        return version1_2 + version1_1_1 + version1_1 + version1_0;
     }
     
     @ReadOperation

@@ -1,5 +1,5 @@
 @/person|/firestation|/medicalRecord
-Feature: Endpoint CRUD
+Feature: Endpoints CRUD
   I want to be able to perform CRUD operations over HTTP on these three endpoints.
  
 #Person 

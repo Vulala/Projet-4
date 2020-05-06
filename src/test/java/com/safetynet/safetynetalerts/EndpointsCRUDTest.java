@@ -24,7 +24,7 @@ import com.safetynet.safetynetalerts.controller.AppController;
 
 @Disabled
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class EndpointCRUDTest {
+public class EndpointsCRUDTest {
     
     @LocalServerPort
     private int port; // Inject the RANDOM_PORT into that variable
