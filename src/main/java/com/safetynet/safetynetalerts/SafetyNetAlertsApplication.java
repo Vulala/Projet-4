@@ -6,30 +6,17 @@ import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.safetynet.safetynetalerts.model.JSONDataObject;
-
 @SpringBootApplication
 public class SafetyNetAlertsApplication {
-    
-    public static void main(String[] args) throws Exception {
-        SpringApplication.run(SafetyNetAlertsApplication.class, args);
-        JSONReader.readJSON();
-    }
-    
-    @Bean
-    // Bean used to enable the httptrace endpoint, making it save the requests in memory
-    // Since Spring Boot 2.2
-    public HttpTraceRepository httpTraceRepository() {
-        return new InMemoryHttpTraceRepository();
-    }
-    
-    @Bean
-    public JSONReader jsonReaderBean() {
-        return new JSONReader();
-    }
-    
-    @Bean
-    public JSONDataObject jsonDataObject() {
-        return new JSONDataObject();
-    }
+
+	public static void main(String[] args) throws Exception {
+		SpringApplication.run(SafetyNetAlertsApplication.class, args);
+	}
+
+	@Bean
+	public HttpTraceRepository httpTraceRepository() {
+		return new InMemoryHttpTraceRepository();
+		// Bean used to enable the httptrace endpoint, allowing it to save the requests
+		// in memory. Since Spring Boot 2.2
+	}
 }

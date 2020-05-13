@@ -2,92 +2,52 @@ package com.safetynet.safetynetalerts.model;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
-
 import com.safetynet.safetynetalerts.JSONReader;
-import com.safetynet.safetynetalerts.model.Person;
 
 public class JSONDataObject {
-    
-    private Person person;
-    private Firestation firestation;
-    private MedicalRecord medicalRecord;
-    private JSONReader jsonReader;
-    private List<JSONDataObject> jsonDataObject;// = jsonReader.getData();
-    
-    public JSONDataObject() {
-    }
-    
-    public JSONDataObject(Person person, Firestation firestation, MedicalRecord medicalRecord) {
-        this.person = person;
-        this.firestation = firestation;
-        this.medicalRecord = medicalRecord;
-    }
-    
-    public List<JSONDataObject> jsonDataObject() {
-        jsonDataObject.addAll(jsonReader.getData());
-        return jsonDataObject;
-    }
-    
-    public Person getPerson() {
-        return person;
-    }
-    
-    public Firestation getFirestation() {
-        return firestation;
-    }
-    
-    public MedicalRecord getMedicalRecord() {
-        return medicalRecord;
-    }
-    
-    public String getAddress() {
-        return firestation.getAddress();
-    }
-    
-    public int getStation() {
-        return firestation.getStation();
-    }
-    
-    public String getFirstName() {
-        return medicalRecord.getFirstName();
-    }
-    
-    public String getLastName() {
-        return medicalRecord.getLastName();
-    }
-    
-    public String getBirthdate() {
-        return medicalRecord.getBirthdate();
-    }
-    
-    public String getMedications() {
-        return medicalRecord.getMedications();
-    }
-    
-    public String getAllergies() {
-        return medicalRecord.getAllergies();
-    }
-    
-    public String getCity() {
-        return person.getCity();
-    }
-    
-    public int getZip() {
-        return person.getZip();
-    }
-    
-    public String getPhone() {
-        return person.getPhone();
-    }
-    
-    public String getEmail() {
-        return person.getEmail();
-    }
-    
-    public List<JSONDataObject> getJsonDataObject() {
-        return jsonDataObject;
-    }
-    
+
+	/**
+	 * {@link JSONDataObject} is used by {@link JSONReader}, presenting all the
+	 * data.json fields. Each fields are represented by each model class in the
+	 * model package. {@link JSONDataObject} is a model itself for
+	 * {@link JSONReader}.
+	 */
+
+	private List<Person> persons;
+	private List<Firestation> firestations;
+	private List<MedicalRecord> medicalRecords;
+
+	public JSONDataObject() {
+	}
+
+	public JSONDataObject(List<Person> person, List<Firestation> firestation, List<MedicalRecord> medicalRecord) {
+		this.persons = person;
+		this.firestations = firestation;
+		this.medicalRecords = medicalRecord;
+	}
+
+	public List<Person> getPersons() {
+		return persons;
+	}
+
+	public void setPersons(List<Person> person) {
+		this.persons = person;
+	}
+
+	public List<Firestation> getFirestations() {
+		return firestations;
+	}
+
+	public void setFirestations(List<Firestation> firestation) {
+		this.firestations = firestation;
+	}
+
+	public List<MedicalRecord> getMedicalRecords() {
+		return medicalRecords;
+	}
+
+	public void setMedicalrecords(List<MedicalRecord> medicalRecord) {
+		this.medicalRecords = medicalRecord;
+	}
+
 }

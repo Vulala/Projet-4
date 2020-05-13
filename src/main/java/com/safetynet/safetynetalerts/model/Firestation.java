@@ -1,8 +1,5 @@
 package com.safetynet.safetynetalerts.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties
 public class Firestation {
     
     private String address;

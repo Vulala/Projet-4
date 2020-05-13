@@ -69,7 +69,6 @@ public class ActuatorsSteps {
     public void i_can_see_that_the_Metrics_endpoint_is_up_and_working() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/actuator/metrics"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.names.[0]").value("jvm.memory.max"));
-        // .andExpect(MockMvcResultMatchers.jsonPath("$.names.[7]").value("logback.events"));
     }
     
     @Then("Showing proper Metrics informations")

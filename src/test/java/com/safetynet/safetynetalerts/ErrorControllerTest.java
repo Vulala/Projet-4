@@ -14,27 +14,27 @@ import com.safetynet.safetynetalerts.controller.AppController;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ErrorControllerTest {
-    
-    @LocalServerPort
-    private int port; // Inject the RANDOM_PORT into that variable
-    
-    @Autowired
-    private AppController controller;
-    
-    @Autowired
-    private TestRestTemplate restTemplate; // Used to perform testing method in the Tests
-    
-    @DisplayName("Sanity check test who fail if the application context cannot start")
-    @Test
-    public void givenTheController_whenItStart_thenItIsNotNull() {
-        // Sanity check test that will fail if the application context cannot start
-        assertThat(controller).isNotNull();
-    }
-    
-    @DisplayName("The error page is correctly showed when an wrong URL is set")
-    @Test
-    public void givenTheAppStart_whenGoingOnAWrongURL_thenTheErrorPageIsShown() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/ThisIsAWrongURL", String.class))
-                .contains("This is the Error Page");
-    }
+
+	@LocalServerPort
+	private int port; // Inject the RANDOM_PORT into that variable
+
+	@Autowired
+	private AppController controller;
+
+	@Autowired
+	private TestRestTemplate restTemplate; // Used to perform testing method in the Tests
+
+	@DisplayName("Sanity check test who fail if the application context cannot start")
+	@Test
+	public void givenTheController_whenItStart_thenItIsNotNull() {
+		// Sanity check test that will fail if the application context cannot start
+		assertThat(controller).isNotNull();
+	}
+
+	@DisplayName("The error page is correctly showed when an wrong URL is set")
+	@Test
+	public void givenTheAppStart_whenGoingOnAWrongURL_thenTheErrorPageIsShown() throws Exception {
+		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/ThisIsAWrongURL", String.class))
+				.contains("An error occurred");
+	}
 }

@@ -23,7 +23,7 @@ public class EndpointsURLsSteps {
         mockMvc.perform(get("/firestation/<station_number>")).andExpect(status().is2xxSuccessful());
     }
     
-    @Then("I see all the persons deserved by this <station_number>, showing me the <firstName>,<lastName>,<address> and <phone> of the concerned people")
+    @Then("I see all the persons deserved by this <station_number>, showing me the <firstName>, <lastName>, <address> and <phone> of the concerned people")
     public void i_see_all_the_persons_deserved_by_this_station_showing_me_the_firstName_lastName_address_and_phone_of_the_concerned_people()
             throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/firestation/<station_number>")

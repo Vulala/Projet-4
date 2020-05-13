@@ -7,7 +7,7 @@ Feature: Endpoints URLs
   Scenario: The </firestation?station_number> is used to GET the list of the people covered by the <station_number> set as parameter
     Given I reach the </firestation> endpoint
     When I set a <station_number> as parameter
-    Then I see all the persons deserved by this station, showing me the <firstName>,<lastName>,<address> and <phone> of the concerned people
+    Then I see all the persons deserved by this <station_number>, showing me the <firstName>, <lastName>, <address> and <phone> of the concerned people
     And It show me a count of the numbers of adults and children (-18yo) deserved by the <station_number>
 
 #/childAlert?address=<address>
