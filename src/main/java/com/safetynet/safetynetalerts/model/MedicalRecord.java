@@ -1,14 +1,19 @@
 package com.safetynet.safetynetalerts.model;
 
+import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@JsonFilter("EndPointsFilters")
 public class MedicalRecord {
 
 	private String firstName;
 	private String lastName;
-	private String birthdate;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+	private Date birthdate;
 	private List<String> medications;
 	private List<String> allergies;
 	@JsonIgnore
@@ -17,7 +22,7 @@ public class MedicalRecord {
 	public MedicalRecord() {
 	}
 
-	public MedicalRecord(String firstName, String lastName, String birthdate, List<String> medications,
+	public MedicalRecord(String firstName, String lastName, Date birthdate, List<String> medications,
 			List<String> allergies, String firstNameAndlastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -43,11 +48,11 @@ public class MedicalRecord {
 		this.lastName = lastName;
 	}
 
-	public String getBirthdate() {
+	public Date getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(String birthdate) {
+	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
 

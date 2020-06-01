@@ -225,7 +225,7 @@ public class EndpointsCRUDTest {
 		JSONObject medicalRecordBody = new JSONObject();
 		medicalRecordBody.put("firstName", "AAAA");
 		medicalRecordBody.put("lastName", "BBBB");
-		medicalRecordBody.put("birthdate", "00/00/0000");
+		medicalRecordBody.put("birthdate", "01/01/0001");
 		List<String> medications = new ArrayList<String>();
 		medications.add("AAAA");
 		medications.add("BBBB");
@@ -244,10 +244,10 @@ public class EndpointsCRUDTest {
 
 		// ASSERT
 		Assert.assertEquals(201, postRequest.getStatusCodeValue());
-		String expectedJSONToBePOSTed = "{\"firstName\":\"AAAA\",\"lastName\":\"BBBB\",\"birthdate\":\"00/00/0000\",\"medications\":[\"AAAA\",\"BBBB\"],\"allergies\":[\"AAAA\",\"BBBB\"]}";
+		String expectedJSONToBePOSTed = "{\"firstName\":\"AAAA\",\"lastName\":\"BBBB\",\"birthdate\":\"01/01/0001\",\"medications\":[\"AAAA\",\"BBBB\"],\"allergies\":[\"AAAA\",\"BBBB\"]}";
 		JSONAssert.assertEquals(expectedJSONToBePOSTed, postBody.getBody(), true);
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/medicalRecord/AAAABBBB", String.class))
-				.contains("AAAA").contains("BBBB").contains("00/00/0000").contains("medications").contains("allergies");
+				.contains("AAAA").contains("BBBB").contains("01/01/0001").contains("medications").contains("allergies");
 	}
 
 	@DisplayName("When going on the /medicalRecord endpoint, we can perform PUT action")
@@ -257,7 +257,7 @@ public class EndpointsCRUDTest {
 		JSONObject previousPOSTBody = new JSONObject();
 		previousPOSTBody.put("firstName", "AAAA");
 		previousPOSTBody.put("lastName", "BBBB");
-		previousPOSTBody.put("birthdate", "00/00/0000");
+		previousPOSTBody.put("birthdate", "01/01/0001");
 		List<String> postMedication = new ArrayList<String>();
 		postMedication.add("AAAA");
 		postMedication.add("BBBB");
@@ -277,7 +277,7 @@ public class EndpointsCRUDTest {
 		JSONObject medicalRecordBody = new JSONObject();
 		medicalRecordBody.put("firstName", "ZZZZ");
 		medicalRecordBody.put("lastName", "YYYY");
-		medicalRecordBody.put("birthdate", "99/99/9999");
+		medicalRecordBody.put("birthdate", "12/31/9999");
 		List<String> medications = new ArrayList<String>();
 		medications.add("ZZZZ");
 		medications.add("YYYY");
@@ -296,10 +296,10 @@ public class EndpointsCRUDTest {
 
 		// ASSERT
 		Assert.assertEquals(200, putRequest.getStatusCodeValue());
-		String expectedJSONToBePUTed = "{\"firstName\":\"ZZZZ\",\"lastName\":\"YYYY\",\"birthdate\":\"99/99/9999\",\"medications\":[\"ZZZZ\",\"YYYY\"],\"allergies\":[\"ZZZZ\",\"YYYY\"]}";
+		String expectedJSONToBePUTed = "{\"firstName\":\"ZZZZ\",\"lastName\":\"YYYY\",\"birthdate\":\"12/31/9999\",\"medications\":[\"ZZZZ\",\"YYYY\"],\"allergies\":[\"ZZZZ\",\"YYYY\"]}";
 		JSONAssert.assertEquals(expectedJSONToBePUTed, putBody.getBody(), true);
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/medicalRecord/AAAABBBB", String.class))
-				.contains("AAAA").contains("BBBB").contains("99/99/9999").contains("medications").contains("allergies");
+				.contains("AAAA").contains("BBBB").contains("12/31/9999").contains("medications").contains("allergies");
 	}
 
 	@DisplayName("When going on the /medicalRecord endpoint, we can perform DELETE action")
@@ -309,7 +309,7 @@ public class EndpointsCRUDTest {
 		JSONObject previousPOSTBody = new JSONObject();
 		previousPOSTBody.put("firstName", "AAAA");
 		previousPOSTBody.put("lastName", "BBBB");
-		previousPOSTBody.put("birthdate", "00/00/0000");
+		previousPOSTBody.put("birthdate", "01/01/0001");
 		List<String> postMedication = new ArrayList<String>();
 		postMedication.add("AAAA");
 		postMedication.add("BBBB");
@@ -331,6 +331,6 @@ public class EndpointsCRUDTest {
 
 		// ASSERT
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/medicalRecord", String.class))
-				.doesNotContain("AAAA").doesNotContain("00/00/0000");
+				.doesNotContain("AAAA").doesNotContain("01/01/0001");
 	}
 }

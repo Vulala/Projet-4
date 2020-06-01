@@ -33,13 +33,3 @@ Feature: The Health/Info/Metrics/Httptrace actuators are working
     When I go on the Httptrace path endpoint
     Then I can see that the Httptrace endpoint is up and working
     And Showing proper Httptrace informations
-  
-#Not requested endpoint    
-  @ReleaseNotes
-  Scenario: We want to be able to access the notes of the different release via an actuator
-    Given The server start
-    #And The actuators are set up
-    When I go on the ReleaseNotes path endpoint
-    Then I can see that the ReleaseNotes endpoint is up and working
-    And Showing proper ReleaseNotes informations
-    

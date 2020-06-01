@@ -72,12 +72,12 @@ public class EndpointsCRUDSteps {
 	// FIRESTATION
 	@Given("I reach the <\\/firestation> endpoint")
 	public void i_reach_the_firestation_endpoint() throws Exception {
-		mockMvc.perform(get("/firestation")).andExpect(status().is2xxSuccessful());
+		mockMvc.perform(get("/firestation/")).andExpect(status().is2xxSuccessful());
 	}
 
 	@When("I create a new <firestation>")
 	public void i_create_a_new_firestation() throws Exception {
-		mockMvc.perform(post("/firestation").contentType(MediaType.APPLICATION_JSON)
+		mockMvc.perform(post("/firestation/").contentType(MediaType.APPLICATION_JSON)
 				.content("{\"address\":\"AAAA\",\"station\":\"1\"}")).andExpect(status().isCreated());
 	}
 
@@ -119,20 +119,20 @@ public class EndpointsCRUDSteps {
 	@When("I create a new <medicalRecord>")
 	public void i_create_a_new_medicalRecord() throws Exception {
 		mockMvc.perform(post("/medicalRecord").contentType(MediaType.APPLICATION_JSON).content(
-				"{\"firstName\":\"AAAA\",\"lastName\":\"BBBB\",\"birthdate\":\"00/00/0000\",\"medications\":[\"BBBB\"],\"allergies\":[\"AAAA\"]}"))
+				"{\"firstName\":\"AAAA\",\"lastName\":\"BBBB\",\"birthdate\":\"01/01/0001\",\"medications\":[\"BBBB\"],\"allergies\":[\"AAAA\"]}"))
 				.andExpect(status().isCreated());
 	}
 
 	@Then("I can see that this <medicalRecord> have been well created")
 	public void i_can_see_that_this_medicalRecord_have_been_well_created() throws Exception {
 		mockMvc.perform(get("/medicalRecord/AAAABBBB")).andExpect(content().json(
-				"{\"firstName\":\"AAAA\",\"lastName\":\"BBBB\",\"birthdate\":\"00/00/0000\",\"medications\":[\"BBBB\"],\"allergies\":[\"AAAA\"]}"));
+				"{\"firstName\":\"AAAA\",\"lastName\":\"BBBB\",\"birthdate\":\"01/01/0001\",\"medications\":[\"BBBB\"],\"allergies\":[\"AAAA\"]}"));
 	}
 
 	@When("I update a <medicalRecord>")
 	public void i_update_a_medicalRecord() throws Exception {
 		mockMvc.perform(put("/medicalRecord/AAAABBBB").contentType(MediaType.APPLICATION_JSON).content(
-				"{\"firstName\":\"ZZZZ\",\"lastName\":\"YYYY\",\"birthdate\":\"99/99/9999\",\"medications\":[\"ZZZZ\"],\"allergies\":[\"YYYY\"]}"))
+				"{\"firstName\":\"ZZZZ\",\"lastName\":\"YYYY\",\"birthdate\":\"12/31/9999\",\"medications\":[\"ZZZZ\"],\"allergies\":[\"YYYY\"]}"))
 				.andExpect(status().isOk());
 	}
 
@@ -141,7 +141,7 @@ public class EndpointsCRUDSteps {
 		mockMvc.perform(get("/medicalRecord/AAAABBBB")).andExpect(status().is2xxSuccessful())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("AAAA"))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("BBBB"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.birthdate").value("99/99/9999"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.birthdate").value("12/31/9999"))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.medications").value("ZZZZ"))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.allergies").value("YYYY"));
 	}

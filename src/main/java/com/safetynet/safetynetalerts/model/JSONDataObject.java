@@ -2,8 +2,10 @@ package com.safetynet.safetynetalerts.model;
 
 import java.util.List;
 
-import com.safetynet.safetynetalerts.JSONReader;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.safetynet.safetynetalerts.service.JSONReader;
 
+@JsonFilter("EndPointsFilters")
 public class JSONDataObject {
 
 	/**
@@ -48,6 +50,12 @@ public class JSONDataObject {
 
 	public void setMedicalrecords(List<MedicalRecord> medicalRecord) {
 		this.medicalRecords = medicalRecord;
+	}
+
+	@Override
+	public String toString() {
+		return "JSONDataObject [persons=" + persons + ", firestations=" + firestations + ", medicalRecords="
+				+ medicalRecords + "]";
 	}
 
 }

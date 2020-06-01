@@ -8,5 +8,5 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/ressources/features", plugin = { "pretty", "html:target/html-cucumber-report" })
 public class EndpointsURLsAT {
-    // Acceptance test to fulfill the endpointsUrls.feature file.
+    // Acceptance test to fulfill the endpointsURLs.feature file.
 }

@@ -78,11 +78,5 @@ Feature: Endpoints CRUD
   #    | CRUD   | person | status  |
   #    | POST   |  AAAA  | success |
   #    | PUT    |  AAAA to BBBB | success |
-  #    | DELETE |  AAAA  | fail |
+  #    | GET    |  AAAA  | fail |
   #    | DELETE |  BBBB  | success |   
-      
-      
-      
-      
-      
-      

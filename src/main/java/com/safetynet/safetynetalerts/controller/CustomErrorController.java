@@ -14,7 +14,7 @@ public class CustomErrorController implements ErrorController {
 
 	/**
 	 * {@link CustomErrorController} implements {@link ErrorController} and define
-	 * the error message that is shown when an error is encountered.
+	 * the error message that is shown when an error is triggered.
 	 */
 
 	@Override

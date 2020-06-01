@@ -7,12 +7,14 @@ import com.safetynet.safetynetalerts.model.Firestation;
 public interface FirestationDAO {
 
 	/**
-	 * Interface used to define CRUD operations for the type {@link Firestation}
+	 * Interface used to define operations for the type {@link Firestation}
 	 */
 
 	public List<Firestation> findAll();
 
 	public Firestation findById(String firestationAddress);
+
+	public List<Firestation> findAddressByStation(int station);
 
 	public List<Firestation> save(Firestation firestation);
 

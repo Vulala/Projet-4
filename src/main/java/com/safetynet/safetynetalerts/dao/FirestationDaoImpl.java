@@ -1,11 +1,12 @@
 package com.safetynet.safetynetalerts.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.safetynet.safetynetalerts.JSONReader;
 import com.safetynet.safetynetalerts.model.Firestation;
+import com.safetynet.safetynetalerts.service.JSONReader;
 
 @Repository
 public class FirestationDaoImpl implements FirestationDAO {
@@ -18,6 +19,9 @@ public class FirestationDaoImpl implements FirestationDAO {
 	 *         data.json file, return type: {@link List}<{@link Firestation}>.
 	 * @Method findById() is used to return a specific {@link Firestation} if
 	 *         present in the data.json file, else return null.
+	 * @Method findAddressByStation() is used to get all the firestations present in
+	 *         the data.json file who match the parameter, return type:
+	 *         {@link List}<{@link Firestation}>.
 	 * @Method save() is used to add a new firestation, return type:
 	 *         {@link List}<{@link Firestation}>.
 	 * @Method update() is used to update a specific firestation, return
@@ -46,6 +50,17 @@ public class FirestationDaoImpl implements FirestationDAO {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<Firestation> findAddressByStation(int station) {
+		List<Firestation> listFirestation = new ArrayList<Firestation>();
+		for (Firestation firestation : firestations) {
+			if (firestation.getStation() == station) {
+				listFirestation.add(firestation);
+			}
+		}
+		return listFirestation;
 	}
 
 	@Override

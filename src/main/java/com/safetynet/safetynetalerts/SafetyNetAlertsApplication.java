@@ -19,4 +19,5 @@ public class SafetyNetAlertsApplication {
 		// Bean used to enable the httptrace endpoint, allowing it to save the requests
 		// in memory. Since Spring Boot 2.2
 	}
+
 }

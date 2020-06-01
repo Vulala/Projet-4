@@ -1,7 +1,9 @@
 package com.safetynet.safetynetalerts.model;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@JsonFilter("EndPointsFilters")
 public class Person {
 
 	private String firstName;

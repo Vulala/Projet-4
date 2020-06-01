@@ -1,23 +1,30 @@
 package com.safetynet.safetynetalerts.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.safetynet.safetynetalerts.JSONReader;
 import com.safetynet.safetynetalerts.model.Person;
+import com.safetynet.safetynetalerts.service.JSONReader;
 
 @Repository
 public class PersonDaoImpl implements PersonDAO {
 
 	/**
-	 * Implementation of the interface {@link PersonDAO} used to define CRUD
-	 * operations for the type {@link Person}.
+	 * Implementation of the interface {@link PersonDAO} used to define operations
+	 * for the type {@link Person}.
 	 * 
 	 * @Method findAll() is used to get all the persons present in the data.json
 	 *         file, return type: {@link List}<{@link Person}>.
 	 * @Method findById() is used to return a specific {@link Person} if present in
 	 *         the data.json file, else return null.
+	 * @Method findByLastName() is used to return a {@link List}<{@link Person}>
+	 *         depending of the parameter.
+	 * @Method findPersonByAddress() is used to return {@link List}<{@link Person}>
+	 *         depending of the parameter.
+	 * @Method findEmailByCity() is used to return {@link List}<{@link Person}>
+	 *         depending of the parameter.
 	 * @Method save() is used to add a new person, return type:
 	 *         {@link List}<{@link Person}>.
 	 * @Method update() is used to update a specific person, return type:
@@ -46,6 +53,39 @@ public class PersonDaoImpl implements PersonDAO {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<Person> findByLastName(String lastName) {
+		List<Person> listPerson = new ArrayList<Person>();
+		for (Person id : persons) {
+			if ((id.getLastName()).equals(lastName)) {
+				listPerson.add(id);
+			}
+		}
+		return listPerson;
+	}
+
+	@Override
+	public List<Person> findPersonByAddress(String address) {
+		List<Person> listPerson = new ArrayList<Person>();
+		for (Person person : persons) {
+			if ((person.getAddress()).equals(address)) {
+				listPerson.add(person);
+			}
+		}
+		return listPerson;
+	}
+
+	@Override
+	public List<Person> findEmailByCity(String city) {
+		List<Person> listPerson = new ArrayList<Person>();
+		for (Person id : persons) {
+			if ((id.getCity()).equals(city)) {
+				listPerson.add(id);
+			}
+		}
+		return listPerson;
 	}
 
 	@Override
