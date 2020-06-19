@@ -8,14 +8,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class AgeCalculator {
 
 	private long children = 0;
 	private long adults = 0;
-	private long age;
+	private long age = 0;
 	private List<Long> listAge = new ArrayList<Long>();
 
 	/**

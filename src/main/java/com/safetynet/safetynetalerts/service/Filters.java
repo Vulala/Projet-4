@@ -11,8 +11,7 @@ public class Filters {
 	 */
 
 	static SimpleBeanPropertyFilter noFilter = SimpleBeanPropertyFilter.serializeAll();
-	public static FilterProvider serializeAll = new SimpleFilterProvider().addFilter("EndPointsFilters",
-			noFilter);
+	public static FilterProvider serializeAll = new SimpleFilterProvider().addFilter("EndPointsFilters", noFilter);
 
 	static SimpleBeanPropertyFilter firestationStationNumber = SimpleBeanPropertyFilter
 			.serializeAllExcept("firestations", "medications", "allergies", "city", "zip", "email", "birthdate");

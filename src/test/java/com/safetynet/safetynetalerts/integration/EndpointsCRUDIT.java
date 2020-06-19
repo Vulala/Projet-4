@@ -1,4 +1,4 @@
-package com.safetynet.safetynetalerts;
+package com.safetynet.safetynetalerts.integration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,25 +22,16 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import com.safetynet.safetynetalerts.controller.AppController;
+import com.safetynet.safetynetalerts.SafetyNetAlertsApplication;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class EndpointsCRUDTest {
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = SafetyNetAlertsApplication.class)
+public class EndpointsCRUDIT {
 
 	@LocalServerPort
 	private int port; // Inject the RANDOM_PORT into that variable
 
 	@Autowired
-	private AppController controller;
-	@Autowired
 	private TestRestTemplate restTemplate; // Used to perform testing method in the Tests
-
-	@DisplayName("Sanity check test who fail if the application context cannot start")
-	@Test
-	public void givenTheController_whenItStart_thenItIsNotNull() {
-		// Sanity check test that will fail if the application context cannot start
-		assertThat(controller).isNotNull();
-	}
 
 	@DisplayName("When going on the /person endpoint, we can perform POST action")
 	@Test

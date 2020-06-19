@@ -24,7 +24,7 @@ class AgeCalculatorTest {
 
 		birthdate1.set(2010, 01, 01);
 		Date birthDateChild = birthdate1.getTime();
-		birthdate2.set(1010, 01, 01);
+		birthdate2.set(2000, 01, 01);
 		Date birthDateAdult = birthdate2.getTime();
 
 		// ACT
@@ -35,7 +35,7 @@ class AgeCalculatorTest {
 
 		// ASSERT
 		assertEquals(ageChild, 10);
-		assertEquals(ageAdult, 1010);
+		assertEquals(ageAdult, 20);
 	}
 
 	@Test

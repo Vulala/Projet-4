@@ -21,7 +21,7 @@ public class PersonDaoImpl implements PersonDAO {
 	 *         the data.json file, else return null.
 	 * @Method findByLastName() is used to return a {@link List}<{@link Person}>
 	 *         depending of the parameter.
-	 * @Method findPersonByAddress() is used to return {@link List}<{@link Person}>
+	 * @Method findByAddress() is used to return {@link List}<{@link Person}>
 	 *         depending of the parameter.
 	 * @Method findEmailByCity() is used to return {@link List}<{@link Person}>
 	 *         depending of the parameter.
@@ -47,9 +47,9 @@ public class PersonDaoImpl implements PersonDAO {
 
 	@Override
 	public Person findById(String firstNameAndlastName) {
-		for (Person id : persons) {
-			if ((id.getfirstNameAndlastName()).equals(firstNameAndlastName)) {
-				return id;
+		for (Person person : persons) {
+			if ((person.getfirstNameAndlastName()).equals(firstNameAndlastName)) {
+				return person;
 			}
 		}
 		return null;
@@ -58,16 +58,16 @@ public class PersonDaoImpl implements PersonDAO {
 	@Override
 	public List<Person> findByLastName(String lastName) {
 		List<Person> listPerson = new ArrayList<Person>();
-		for (Person id : persons) {
-			if ((id.getLastName()).equals(lastName)) {
-				listPerson.add(id);
+		for (Person person : persons) {
+			if ((person.getLastName()).equals(lastName)) {
+				listPerson.add(person);
 			}
 		}
 		return listPerson;
 	}
 
 	@Override
-	public List<Person> findPersonByAddress(String address) {
+	public List<Person> findByAddress(String address) {
 		List<Person> listPerson = new ArrayList<Person>();
 		for (Person person : persons) {
 			if ((person.getAddress()).equals(address)) {
@@ -80,9 +80,9 @@ public class PersonDaoImpl implements PersonDAO {
 	@Override
 	public List<Person> findEmailByCity(String city) {
 		List<Person> listPerson = new ArrayList<Person>();
-		for (Person id : persons) {
-			if ((id.getCity()).equals(city)) {
-				listPerson.add(id);
+		for (Person person : persons) {
+			if ((person.getCity()).equals(city)) {
+				listPerson.add(person);
 			}
 		}
 		return listPerson;

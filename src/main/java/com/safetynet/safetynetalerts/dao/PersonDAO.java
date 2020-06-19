@@ -16,7 +16,7 @@ public interface PersonDAO {
 
 	public List<Person> findByLastName(String lastName);
 
-	public List<Person> findPersonByAddress(String address);
+	public List<Person> findByAddress(String address);
 
 	public List<Person> findEmailByCity(String city);
 
