@@ -10,17 +10,17 @@ import java.util.List;
 
 public class AgeCalculator {
 
-	private long children = 0;
-	private long adults = 0;
-	private long age = 0;
-	private List<Long> listAge = new ArrayList<Long>();
-
 	/**
 	 * Calculate the age of a person from the date of birth.
 	 * 
 	 * @param birthDate ,from the JSON file. The count of children, adults and the
 	 *                  age of the person are accessible via getters.
 	 */
+
+	private long children = 0;
+	private long adults = 0;
+	private long age = 0;
+	private List<Long> listAge = new ArrayList<Long>();
 
 	public void calculateDate(Date birthdate) {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy"); // Equal to the JSON file

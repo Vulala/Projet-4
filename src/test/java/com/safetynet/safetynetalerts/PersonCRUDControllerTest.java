@@ -14,7 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.safetynet.safetynetalerts.controller.PersonCRUDController;
-import com.safetynet.safetynetalerts.dao.PersonDAO;
 import com.safetynet.safetynetalerts.model.Person;
+import com.safetynet.safetynetalerts.service.PersonCRUDService;
+import com.safetynet.safetynetalerts.service.object.PersonCRUDObject;
 
 @WebMvcTest(PersonCRUDController.class)
 public class PersonCRUDControllerTest {
@@ -35,13 +35,14 @@ public class PersonCRUDControllerTest {
 	private MockMvc mockMvc;
 
 	@MockBean
-	private PersonDAO personDAO;
+	private PersonCRUDService personCRUDService;
 
 	@Test
 	public void showAllPersons() throws Exception {
 		// ARRANGE
 		List<Person> listPerson = new ArrayList<Person>();
-		when(personDAO.findAll()).thenReturn(listPerson);
+		PersonCRUDObject personCRUDObject = new PersonCRUDObject(listPerson);
+		when(personCRUDService.findAll()).thenReturn(personCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(get("/person")).andDo(print()).andReturn();
@@ -49,16 +50,15 @@ public class PersonCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(personDAO, times(1)).findAll();
+		verify(personCRUDService, times(1)).findAll();
 	}
 
 	@Test
 	public void showPersonById() throws Exception {
 		// ARRANGE
 		Person person = new Person();
-		String firstName = "AAAA";
-		person.setFirstName(firstName);
-		when(personDAO.findById(any(String.class))).thenReturn(person);
+		PersonCRUDObject personCRUDObject = new PersonCRUDObject(person);
+		when(personCRUDService.findById(any(String.class))).thenReturn(personCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(get("/person/Someone")).andDo(print()).andReturn();
@@ -66,16 +66,15 @@ public class PersonCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(personDAO, times(1)).findById(any(String.class));
+		verify(personCRUDService, times(1)).findById(any(String.class));
 	}
 
-	@Disabled
 	@Test
 	public void addPerson() throws Exception {
 		// ARRANGE
 		List<Person> listPerson = new ArrayList<Person>();
-		Person person = new Person();
-		when(personDAO.save(person)).thenReturn(listPerson);
+		PersonCRUDObject personCRUDObject = new PersonCRUDObject(listPerson);
+		when(personCRUDService.save(any(Person.class))).thenReturn(personCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc
@@ -85,16 +84,15 @@ public class PersonCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 201);
-		verify(personDAO, times(1)).save(person);
+		verify(personCRUDService, times(1)).save(any(Person.class));
 	}
 
 	@Test
 	public void updatePerson() throws Exception {
 		// ARRANGE
 		Person person = new Person();
-		String firstName = "AAAA";
-		person.setFirstName(firstName);
-		when(personDAO.update(any(String.class), (any(Person.class)))).thenReturn(person);
+		PersonCRUDObject personCRUDObject = new PersonCRUDObject(person);
+		when(personCRUDService.update(any(String.class), any(Person.class))).thenReturn(personCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(
@@ -104,13 +102,13 @@ public class PersonCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(personDAO, times(1)).update(any(String.class), (any(Person.class)));
+		verify(personCRUDService, times(1)).update(any(String.class), (any(Person.class)));
 	}
 
 	@Test
 	public void deletePerson() throws Exception {
 		// ARRANGE
-		Mockito.doNothing().when(personDAO).deleteById("firstNameAndlastName");
+		Mockito.doNothing().when(personCRUDService).deleteById("firstNameAndlastName");
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(delete("/person/Someone")).andDo(print()).andReturn();
@@ -118,6 +116,6 @@ public class PersonCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(personDAO, times(1)).deleteById(any(String.class));
+		verify(personCRUDService, times(1)).deleteById(any(String.class));
 	}
 }

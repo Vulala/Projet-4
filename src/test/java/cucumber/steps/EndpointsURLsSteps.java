@@ -69,8 +69,8 @@ public class EndpointsURLsSteps {
 
 	@Then("If there is no children, then the url is empty")
 	public void if_there_is_no_children_then_the_url_is_empty() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/childAlert?489 Manchester St")
-				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
+		mockMvc.perform(MockMvcRequestBuilders.get("/childAlert?address=489 Manchester St"))
+				.andExpect(status().isOk());
 	}
 
 	@Given("I reach the <\\/phoneAlert> endpoint")
@@ -174,8 +174,8 @@ public class EndpointsURLsSteps {
 		mockMvc.perform(MockMvcRequestBuilders.get("/personInfo?firstName=John&lastName=Boyd")
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.content().string(containsString("John")))
-				.andExpect(MockMvcResultMatchers.content().string(containsString("Allison")));
+				.andExpect(MockMvcResultMatchers.content().string(containsString("Boyd")))
+				.andExpect(MockMvcResultMatchers.content().string(containsString("03/15")));
 	}
 
 	@Given("I reach the <\\/communityEmail> endpoint")

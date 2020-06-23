@@ -14,7 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.safetynet.safetynetalerts.controller.FirestationCRUDController;
-import com.safetynet.safetynetalerts.dao.FirestationDAO;
 import com.safetynet.safetynetalerts.model.Firestation;
+import com.safetynet.safetynetalerts.service.FirestationCRUDService;
+import com.safetynet.safetynetalerts.service.object.FirestationCRUDObject;
 
 @WebMvcTest(FirestationCRUDController.class)
 public class FirestationCRUDControllerTest {
@@ -35,13 +35,14 @@ public class FirestationCRUDControllerTest {
 	private MockMvc mockMvc;
 
 	@MockBean
-	private FirestationDAO firestationDAO;
+	private FirestationCRUDService firestationCRUDService;
 
 	@Test
 	public void showAllFirestations() throws Exception {
 		// ARRANGE
 		List<Firestation> listFirestation = new ArrayList<Firestation>();
-		when(firestationDAO.findAll()).thenReturn(listFirestation);
+		FirestationCRUDObject firestationCRUDObject = new FirestationCRUDObject(listFirestation);
+		when(firestationCRUDService.findAll()).thenReturn(firestationCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(get("/firestation/")).andDo(print()).andReturn();
@@ -49,16 +50,15 @@ public class FirestationCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(firestationDAO, times(1)).findAll();
+		verify(firestationCRUDService, times(1)).findAll();
 	}
 
 	@Test
 	public void showFirestationById() throws Exception {
 		// ARRANGE
 		Firestation firestation = new Firestation();
-		String address = "AAAA";
-		firestation.setAddress(address);
-		when(firestationDAO.findById(any(String.class))).thenReturn(firestation);
+		FirestationCRUDObject firestationCRUDObject = new FirestationCRUDObject(firestation);
+		when(firestationCRUDService.findById(any(String.class))).thenReturn(firestationCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(get("/firestation/Somewhere")).andDo(print()).andReturn();
@@ -66,16 +66,15 @@ public class FirestationCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(firestationDAO, times(1)).findById(any(String.class));
+		verify(firestationCRUDService, times(1)).findById(any(String.class));
 	}
 
-	@Disabled
 	@Test
 	public void addFirestation() throws Exception {
 		// ARRANGE
 		List<Firestation> listFirestation = new ArrayList<Firestation>();
-		Firestation firestation = new Firestation();
-		when(firestationDAO.save(firestation)).thenReturn(listFirestation);
+		FirestationCRUDObject firestationCRUDObject = new FirestationCRUDObject(listFirestation);
+		when(firestationCRUDService.save(any(Firestation.class))).thenReturn(firestationCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc
@@ -85,16 +84,15 @@ public class FirestationCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 201);
-		verify(firestationDAO, times(1)).save(firestation);
+		verify(firestationCRUDService, times(1)).save((any(Firestation.class)));
 	}
 
 	@Test
 	public void updateFirestation() throws Exception {
 		// ARRANGE
 		Firestation firestation = new Firestation();
-		String address = "AAAA";
-		firestation.setAddress(address);
-		when(firestationDAO.update(any(String.class), (any(Firestation.class)))).thenReturn(firestation);
+		FirestationCRUDObject firestationCRUDObject = new FirestationCRUDObject(firestation);
+		when(firestationCRUDService.update(any(String.class), any(Firestation.class))).thenReturn(firestationCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(
@@ -104,13 +102,13 @@ public class FirestationCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(firestationDAO, times(1)).update(any(String.class), (any(Firestation.class)));
+		verify(firestationCRUDService, times(1)).update(any(String.class), any(Firestation.class));
 	}
 
 	@Test
 	public void deleteFirestation() throws Exception {
 		// ARRANGE
-		Mockito.doNothing().when(firestationDAO).deleteById("firstNameAndlastName");
+		Mockito.doNothing().when(firestationCRUDService).deleteById("firstNameAndlastName");
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(delete("/firestation/Somewhere")).andDo(print()).andReturn();
@@ -118,6 +116,6 @@ public class FirestationCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(firestationDAO, times(1)).deleteById(any(String.class));
+		verify(firestationCRUDService, times(1)).deleteById(any(String.class));
 	}
 }

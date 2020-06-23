@@ -1,7 +1,6 @@
 package com.safetynet.safetynetalerts.controller;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +16,10 @@ import org.tinylog.Logger;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.safetynet.safetynetalerts.dao.PersonDAO;
 import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.service.Filters;
+import com.safetynet.safetynetalerts.service.PersonCRUDService;
+import com.safetynet.safetynetalerts.service.object.PersonCRUDObject;
 
 @RestController
 public class PersonCRUDController {
@@ -27,23 +27,23 @@ public class PersonCRUDController {
 	// CRUD operations on /person
 
 	@Autowired
-	private PersonDAO personDAO;
+	private PersonCRUDService personCRUDService;
 	@Autowired
 	private ObjectMapper mapper;
 
 	@GetMapping(value = "/person")
 	public String showAllPersons() throws JsonProcessingException {
 		Logger.info("GET request of : /person");
-		String response = mapper.writer(Filters.serializeAll).writeValueAsString(personDAO.findAll());
+		String response = mapper.writer(Filters.personNoPerson).writeValueAsString(personCRUDService.findAll());
 		Logger.info("Success");
 		return response;
 	}
 
 	@GetMapping(value = "/person/{firstNameAndlastName}")
 	public String showPersonById(@PathVariable String firstNameAndlastName) throws JsonProcessingException {
-		Logger.info("GET request of : /person/{firstNameAndlastName}");
-		String response = mapper.writer(Filters.serializeAll)
-				.writeValueAsString(personDAO.findById(firstNameAndlastName));
+		Logger.info("GET request of : /person/" + firstNameAndlastName);
+		String response = mapper.writer(Filters.personNoList)
+				.writeValueAsString(personCRUDService.findById(firstNameAndlastName));
 		Logger.info("Success");
 		return response;
 	}
@@ -51,12 +51,13 @@ public class PersonCRUDController {
 	@PostMapping(value = "/person")
 	public ResponseEntity<Void> addPerson(@RequestBody Person person) {
 		Logger.info("POST request on : /person");
-		List<Person> savePerson = personDAO.save(person);
+		PersonCRUDObject personCRUDObject = personCRUDService.save(person);
 		if (person == null) {
 			return ResponseEntity.noContent().build();
 
 		}
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().buildAndExpand(savePerson.get(1)).toUri();
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+				.buildAndExpand(personCRUDObject.getListPersons()).toUri();
 		Logger.info("Success");
 		return ResponseEntity.created(location).build();
 	}
@@ -64,17 +65,17 @@ public class PersonCRUDController {
 	@PutMapping(value = "/person/{firstNameAndlastName}")
 	public String updatePerson(@RequestBody Person person, @PathVariable String firstNameAndlastName)
 			throws JsonProcessingException {
-		Logger.info("PUT request on : /person/{firstNameAndlastName}");
-		String response = mapper.writer(Filters.serializeAll)
-				.writeValueAsString(personDAO.update(firstNameAndlastName, person));
+		Logger.info("PUT request on : /person/" + firstNameAndlastName);
+		String response = mapper.writer(Filters.personNoList)
+				.writeValueAsString(personCRUDService.update(firstNameAndlastName, person));
 		Logger.info("Success");
 		return response;
 	}
 
 	@DeleteMapping(value = "/person/{firstNameAndlastName}")
 	public void deletePerson(@PathVariable String firstNameAndlastName) {
-		Logger.info("DELETE request of : /person/{firstNameAndlastName}");
-		personDAO.deleteById(firstNameAndlastName);
+		Logger.info("DELETE request of : /person/" + firstNameAndlastName);
+		personCRUDService.deleteById(firstNameAndlastName);
 		Logger.info("Success");
 	}
 }

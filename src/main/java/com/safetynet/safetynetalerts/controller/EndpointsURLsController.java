@@ -12,6 +12,7 @@ import com.safetynet.safetynetalerts.model.AdultsAndChildren;
 import com.safetynet.safetynetalerts.model.Age;
 import com.safetynet.safetynetalerts.service.EndpointsURLsService;
 import com.safetynet.safetynetalerts.service.Filters;
+import com.safetynet.safetynetalerts.service.object.EndpointsURLsObject;
 
 @RestController
 public class EndpointsURLsController {
@@ -19,21 +20,21 @@ public class EndpointsURLsController {
 	// Endpoints URLs
 
 	@Autowired
-	private ObjectMapper mapper;
-	@Autowired
 	private EndpointsURLsService endpointsURLsService;
+	@Autowired
+	private ObjectMapper mapper;
 
 	@GetMapping(value = "/firestation{stationNumber}")
 	public String showPersonsByFirestation(@RequestParam(value = "stationNumber") int stationNumber)
 			throws JsonProcessingException {
 		Logger.info("GET request of : /firestation{stationNumber}");
 
-		endpointsURLsService.showPersonsByFirestation(stationNumber);
+		EndpointsURLsObject endpointsURLsObject = endpointsURLsService.showPersonsByFirestation(stationNumber);
 
 		String response = mapper.writeValueAsString(
-				new AdultsAndChildren(endpointsURLsService.getAdults(), endpointsURLsService.getChildren()))
+				new AdultsAndChildren(endpointsURLsObject.getAdults(), endpointsURLsObject.getChildren()))
 				+ mapper.writer(Filters.firestationStationNumberFilter)
-						.writeValueAsString(endpointsURLsService.getListPersons());
+						.writeValueAsString(endpointsURLsObject.getListPersons());
 		Logger.info("Success");
 		return response;
 	}
@@ -43,16 +44,16 @@ public class EndpointsURLsController {
 			throws JsonProcessingException {
 		Logger.info("GET request of : /childAlert{address}");
 
-		endpointsURLsService.showChildrenByAddress(address);
-		long children = endpointsURLsService.getChildren();
+		EndpointsURLsObject endpointsURLsObject = endpointsURLsService.showChildrenByAddress(address);
+		long children = endpointsURLsObject.getChildren();
 
 		if (children == 0) {
 			Logger.info("Success");
 			return null;
 		} else {
 			String response = mapper.writer(Filters.childAlertFilter)
-					.writeValueAsString(endpointsURLsService.getListPersons())
-					+ mapper.writeValueAsString(new Age(endpointsURLsService.getAge()));
+					.writeValueAsString(endpointsURLsObject.getListPersons())
+					+ mapper.writeValueAsString(new Age(endpointsURLsObject.getAge()));
 			Logger.info("Success");
 			return response;
 		}
@@ -63,10 +64,10 @@ public class EndpointsURLsController {
 			throws JsonProcessingException {
 		Logger.info("GET request of : /phoneAlert{firestation}");
 
-		endpointsURLsService.showPhoneNumbersByFirestation(firestation);
+		EndpointsURLsObject endpointsURLsObject = endpointsURLsService.showPhoneNumbersByFirestation(firestation);
 
 		String response = mapper.writer(Filters.phoneAlertFilter)
-				.writeValueAsString(endpointsURLsService.getListPersons());
+				.writeValueAsString(endpointsURLsObject.getListPersons());
 		Logger.info("Success");
 		return response;
 	}
@@ -75,14 +76,14 @@ public class EndpointsURLsController {
 	public String showPersonsByAddress(@RequestParam(value = "address") String address) throws JsonProcessingException {
 		Logger.info("GET request of : /fire{address}");
 
-		endpointsURLsService.showPersonsByAddress(address);
+		EndpointsURLsObject endpointsURLsObject = endpointsURLsService.showPersonsByAddress(address);
 
 		String response = mapper.writer(Filters.fireAddressFilter)
-				.writeValueAsString(endpointsURLsService.getFirestations())
-				+ mapper.writer(Filters.fireAddressFilter).writeValueAsString(endpointsURLsService.getListPersons())
+				.writeValueAsString(endpointsURLsObject.getFirestations())
+				+ mapper.writer(Filters.fireAddressFilter).writeValueAsString(endpointsURLsObject.getListPersons())
 				+ mapper.writer(Filters.fireAddressFilter)
-						.writeValueAsString(endpointsURLsService.getListMedicalRecords())
-				+ mapper.writeValueAsString(new Age(endpointsURLsService.getAge()));
+						.writeValueAsString(endpointsURLsObject.getListMedicalRecords())
+				+ mapper.writeValueAsString(new Age(endpointsURLsObject.getAge()));
 		Logger.info("Success");
 		return response;
 	}
@@ -92,13 +93,13 @@ public class EndpointsURLsController {
 			throws JsonProcessingException {
 		Logger.info("GET request of : /flood/stations{stations}");
 
-		endpointsURLsService.showPersonsAddressByFirestation(stations);
+		EndpointsURLsObject endpointsURLsObject = endpointsURLsService.showPersonsAddressByFirestation(stations);
 
 		String response = mapper.writer(Filters.floodStationsFilter)
-				.writeValueAsString(endpointsURLsService.getListPersons())
+				.writeValueAsString(endpointsURLsObject.getListPersons())
 				+ mapper.writer(Filters.floodStationsFilter)
-						.writeValueAsString(endpointsURLsService.getListMedicalRecords())
-				+ mapper.writeValueAsString(new Age(endpointsURLsService.getAge()));
+						.writeValueAsString(endpointsURLsObject.getListMedicalRecords())
+				+ mapper.writeValueAsString(new Age(endpointsURLsObject.getAge()));
 		Logger.info("Success");
 		return response;
 	}
@@ -108,13 +109,13 @@ public class EndpointsURLsController {
 			@RequestParam(value = "lastName") String lastName) throws JsonProcessingException {
 		Logger.info("GET request of : /personInfo{firstName}{lastName}");
 
-		endpointsURLsService.showPersonInfoByPerson(firstName, lastName);
+		EndpointsURLsObject endpointsURLsObject = endpointsURLsService.showPersonInfoByPerson(firstName, lastName);
 
 		String response = mapper.writer(Filters.personInfoFilter)
-				.writeValueAsString(endpointsURLsService.getListPersons())
+				.writeValueAsString(endpointsURLsObject.getListPersons())
 				+ mapper.writer(Filters.personInfoFilter)
-						.writeValueAsString(endpointsURLsService.getListMedicalRecords())
-				+ mapper.writeValueAsString(new Age(endpointsURLsService.getAge()));
+						.writeValueAsString(endpointsURLsObject.getListMedicalRecords())
+				+ mapper.writeValueAsString(new Age(endpointsURLsObject.getAge()));
 		Logger.info("Success");
 		return response;
 	}
@@ -123,10 +124,10 @@ public class EndpointsURLsController {
 	public String showMailsByCity(@RequestParam String city) throws JsonProcessingException {
 		Logger.info("GET request of : /communityEmail{city}");
 
-		endpointsURLsService.showMailsByCity(city);
+		EndpointsURLsObject endpointsURLsObject = endpointsURLsService.showMailsByCity(city);
 
 		String response = mapper.writer(Filters.communityEmailFilter)
-				.writeValueAsString(endpointsURLsService.getListPersons());
+				.writeValueAsString(endpointsURLsObject.getListPersons());
 		Logger.info("Success");
 		return response;
 	}

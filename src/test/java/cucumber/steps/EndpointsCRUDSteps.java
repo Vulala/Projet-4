@@ -37,8 +37,8 @@ public class EndpointsCRUDSteps {
 
 	@Then("I can see that this <person> have been well created")
 	public void i_can_see_that_this_person_have_been_well_created() throws Exception {
-		mockMvc.perform(get("/person/AAAABBBB")).andExpect(content().json("{\"firstName\":\"AAAA\"}"))
-				.andExpect(content().json("{\"email\":\"AAAA@BBBB.com\"}"));
+		mockMvc.perform(get("/person/AAAABBBB")).andExpect(content().json("{person:{\"firstName\":\"AAAA\"}}"))
+				.andExpect(content().json("{person:{\"email\":\"AAAA@BBBB.com\"}}"));
 	}
 
 	@When("I update a <person>")
@@ -51,11 +51,11 @@ public class EndpointsCRUDSteps {
 	@Then("I can see that this <person> have been well updated")
 	public void i_can_see_that_this_person_have_been_well_updated() throws Exception {
 		mockMvc.perform(get("/person/AAAABBBB")).andExpect(status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.address").value("ZZZZ"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.city").value("ZZZZ"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.zip").value("9999"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.phone").value("9999"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.email").value("ZZZZ@ZZZZ.com"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.person.address").value("ZZZZ"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.person.city").value("ZZZZ"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.person.zip").value("9999"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.person.phone").value("9999"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.person.email").value("ZZZZ@ZZZZ.com"));
 	}
 
 	@When("I delete a <person>")
@@ -66,7 +66,7 @@ public class EndpointsCRUDSteps {
 	@Then("I can see that this <person> have been well deleted")
 	public void i_can_see_that_this_person_have_been_well_deleted() throws Exception {
 		mockMvc.perform(get("/person/AAAABBBB"))
-				.andExpect(MockMvcResultMatchers.jsonPath("email").doesNotHaveJsonPath());
+				.andExpect(MockMvcResultMatchers.jsonPath("person.email").doesNotHaveJsonPath());
 	}
 
 	// FIRESTATION
@@ -83,7 +83,7 @@ public class EndpointsCRUDSteps {
 
 	@Then("I can see that this <firestation> have been well created")
 	public void i_can_see_that_this_firestation_have_been_well_created() throws Exception {
-		mockMvc.perform(get("/firestation/AAAA")).andExpect(content().json("{\"address\":\"AAAA\"}"));
+		mockMvc.perform(get("/firestation/AAAA")).andExpect(content().json("{firestation:{\"address\":\"AAAA\"}}"));
 	}
 
 	@When("I update a <firestation>")
@@ -95,8 +95,8 @@ public class EndpointsCRUDSteps {
 	@Then("I can see that this <firestation> have been well updated")
 	public void i_can_see_that_this_firestation_have_been_well_updated() throws Exception {
 		mockMvc.perform(get("/firestation/AAAA")).andExpect(status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.address").value("AAAA"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.station").value("9999"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.firestation.address").value("AAAA"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.firestation.station").value("9999"));
 	}
 
 	@When("I delete a <firestation>")
@@ -107,7 +107,7 @@ public class EndpointsCRUDSteps {
 	@Then("I can see that this <firestation> have been well deleted")
 	public void i_can_see_that_this_firestation_have_been_well_deleted() throws Exception {
 		mockMvc.perform(get("/firestation/AAAA"))
-				.andExpect(MockMvcResultMatchers.jsonPath("address").doesNotHaveJsonPath());
+				.andExpect(MockMvcResultMatchers.jsonPath("firestation.address").doesNotHaveJsonPath());
 	}
 
 	// MEDICAL RECORD
@@ -126,7 +126,7 @@ public class EndpointsCRUDSteps {
 	@Then("I can see that this <medicalRecord> have been well created")
 	public void i_can_see_that_this_medicalRecord_have_been_well_created() throws Exception {
 		mockMvc.perform(get("/medicalRecord/AAAABBBB")).andExpect(content().json(
-				"{\"firstName\":\"AAAA\",\"lastName\":\"BBBB\",\"birthdate\":\"01/01/0001\",\"medications\":[\"BBBB\"],\"allergies\":[\"AAAA\"]}"));
+				"{medicalRecord:{\"firstName\":\"AAAA\",\"lastName\":\"BBBB\",\"birthdate\":\"01/01/0001\",\"medications\":[\"BBBB\"],\"allergies\":[\"AAAA\"]}}"));
 	}
 
 	@When("I update a <medicalRecord>")
@@ -139,11 +139,11 @@ public class EndpointsCRUDSteps {
 	@Then("I can see that this <medicalRecord> have been well updated")
 	public void i_can_see_that_this_medicalRecord_have_been_well_updated() throws Exception {
 		mockMvc.perform(get("/medicalRecord/AAAABBBB")).andExpect(status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("AAAA"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("BBBB"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.birthdate").value("12/31/9999"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.medications").value("ZZZZ"))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.allergies").value("YYYY"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.medicalRecord.firstName").value("AAAA"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.medicalRecord.lastName").value("BBBB"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.medicalRecord.birthdate").value("12/31/9999"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.medicalRecord.medications").value("ZZZZ"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.medicalRecord.allergies").value("YYYY"));
 	}
 
 	@When("I delete a <medicalRecord>")
@@ -154,7 +154,7 @@ public class EndpointsCRUDSteps {
 	@Then("I can see that this <medicalRecord> have been well deleted")
 	public void i_can_see_that_this_medicalRecord_have_been_well_deleted() throws Exception {
 		mockMvc.perform(get("/medicalRecord/AAAABBBB"))
-				.andExpect(MockMvcResultMatchers.jsonPath("medications").doesNotHaveJsonPath());
+				.andExpect(MockMvcResultMatchers.jsonPath("medicalRecord.medications").doesNotHaveJsonPath());
 	}
 
 }

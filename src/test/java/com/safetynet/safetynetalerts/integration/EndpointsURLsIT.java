@@ -53,7 +53,7 @@ public class EndpointsURLsIT {
 	public void givenTheAppStart_whenGoingOnTheChildAlert_AddressEndpoint_thenAllTheChildrenPresentAtThisAddressAreShown()
 			throws Exception {
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/childAlert?address=947 E. Rose Dr",
-				String.class)).contains("firstName").contains("lastName").contains("phone").contains("age");
+				String.class)).contains("firstName").contains("lastName").contains("age");
 	}
 
 	@DisplayName("The childAlert{address} endpoint page contains all the adults present at this {address} if atleast one child is present")
@@ -61,7 +61,7 @@ public class EndpointsURLsIT {
 	public void givenTheAppStart_whenGoingOnTheChildAlert_AddressEndpoint_thenAllTheAdultsPresentAtThisAddressIfThereIsAtleatOneChildAreShown()
 			throws Exception {
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/childAlert?address=947 E. Rose Dr",
-				String.class)).contains("firstName").contains("lastName").contains("phone").contains("age");
+				String.class)).contains("firstName").contains("lastName").contains("age");
 		// The <address> must be an address with atleast one child
 	}
 

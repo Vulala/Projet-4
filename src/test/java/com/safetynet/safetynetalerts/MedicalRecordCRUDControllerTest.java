@@ -14,7 +14,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.safetynet.safetynetalerts.controller.MedicalRecordCRUDController;
-import com.safetynet.safetynetalerts.dao.MedicalRecordDAO;
 import com.safetynet.safetynetalerts.model.MedicalRecord;
+import com.safetynet.safetynetalerts.service.MedicalRecordCRUDService;
+import com.safetynet.safetynetalerts.service.object.MedicalRecordCRUDObject;
 
 @WebMvcTest(MedicalRecordCRUDController.class)
 public class MedicalRecordCRUDControllerTest {
@@ -35,13 +35,14 @@ public class MedicalRecordCRUDControllerTest {
 	private MockMvc mockMvc;
 
 	@MockBean
-	private MedicalRecordDAO medicalRecordDAO;
+	private MedicalRecordCRUDService medicalRecordCRUDService;
 
 	@Test
 	public void showAllMedicalRecords() throws Exception {
 		// ARRANGE
 		List<MedicalRecord> listMedicalRecord = new ArrayList<MedicalRecord>();
-		when(medicalRecordDAO.findAll()).thenReturn(listMedicalRecord);
+		MedicalRecordCRUDObject medicalRecordCRUDObject = new MedicalRecordCRUDObject(listMedicalRecord);
+		when(medicalRecordCRUDService.findAll()).thenReturn(medicalRecordCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(get("/medicalRecord")).andDo(print()).andReturn();
@@ -49,16 +50,15 @@ public class MedicalRecordCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(medicalRecordDAO, times(1)).findAll();
+		verify(medicalRecordCRUDService, times(1)).findAll();
 	}
 
 	@Test
 	public void showMedicalRecordById() throws Exception {
 		// ARRANGE
 		MedicalRecord medicalRecord = new MedicalRecord();
-		String firstName = "AAAA";
-		medicalRecord.setFirstName(firstName);
-		when(medicalRecordDAO.findById(any(String.class))).thenReturn(medicalRecord);
+		MedicalRecordCRUDObject medicalRecordCRUDObject = new MedicalRecordCRUDObject(medicalRecord);
+		when(medicalRecordCRUDService.findById(any(String.class))).thenReturn(medicalRecordCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(get("/medicalRecord/Someone")).andDo(print()).andReturn();
@@ -66,16 +66,15 @@ public class MedicalRecordCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(medicalRecordDAO, times(1)).findById(any(String.class));
+		verify(medicalRecordCRUDService, times(1)).findById(any(String.class));
 	}
 
-	@Disabled
 	@Test
 	public void addMedicalRecord() throws Exception {
 		// ARRANGE
 		List<MedicalRecord> listMedicalRecord = new ArrayList<MedicalRecord>();
-		MedicalRecord medicalRecord = new MedicalRecord();
-		when(medicalRecordDAO.save(medicalRecord)).thenReturn(listMedicalRecord);
+		MedicalRecordCRUDObject medicalRecordCRUDObject = new MedicalRecordCRUDObject(listMedicalRecord);
+		when(medicalRecordCRUDService.save(any(MedicalRecord.class))).thenReturn(medicalRecordCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(
@@ -85,16 +84,16 @@ public class MedicalRecordCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 201);
-		verify(medicalRecordDAO, times(1)).save(medicalRecord);
+		verify(medicalRecordCRUDService, times(1)).save(any(MedicalRecord.class));
 	}
 
 	@Test
 	public void updateMedicalRecord() throws Exception {
 		// ARRANGE
 		MedicalRecord medicalRecord = new MedicalRecord();
-		String firstName = "AAAA";
-		medicalRecord.setFirstName(firstName);
-		when(medicalRecordDAO.update(any(String.class), (any(MedicalRecord.class)))).thenReturn(medicalRecord);
+		MedicalRecordCRUDObject medicalRecordCRUDObject = new MedicalRecordCRUDObject(medicalRecord);
+		when(medicalRecordCRUDService.update(any(String.class), (any(MedicalRecord.class))))
+				.thenReturn(medicalRecordCRUDObject);
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(put("/medicalRecord/Someone").contentType(MediaType.APPLICATION_JSON)
@@ -103,13 +102,13 @@ public class MedicalRecordCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(medicalRecordDAO, times(1)).update(any(String.class), (any(MedicalRecord.class)));
+		verify(medicalRecordCRUDService, times(1)).update(any(String.class), (any(MedicalRecord.class)));
 	}
 
 	@Test
 	public void deleteMedicalRecord() throws Exception {
 		// ARRANGE
-		Mockito.doNothing().when(medicalRecordDAO).deleteById("firstNameAndlastName");
+		Mockito.doNothing().when(medicalRecordCRUDService).deleteById("firstNameAndlastName");
 
 		// ACT
 		MvcResult mvcResult = mockMvc.perform(delete("/medicalRecord/Someone")).andDo(print()).andReturn();
@@ -117,6 +116,6 @@ public class MedicalRecordCRUDControllerTest {
 
 		// ASSERT
 		assertEquals(status, 200);
-		verify(medicalRecordDAO, times(1)).deleteById(any(String.class));
+		verify(medicalRecordCRUDService, times(1)).deleteById(any(String.class));
 	}
 }
