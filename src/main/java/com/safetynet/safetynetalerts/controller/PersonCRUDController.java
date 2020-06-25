@@ -24,7 +24,25 @@ import com.safetynet.safetynetalerts.service.object.PersonCRUDObject;
 @RestController
 public class PersonCRUDController {
 
-	// CRUD operations on /person
+	/**
+	 * Rest controller for <b>CRUD</b> operations on /person. <br>
+	 * <br>
+	 * The <b>GET</b> <i>/person</i> endpoint is used to <b>READ</b> all the
+	 * persons. <br>
+	 * The <b>GET</b> <i>/person/{firstNameAndlastName}</i> endpoint is used to
+	 * <b>READ</b> a specific person. <br>
+	 * The <b>POST</b> <i>/person</i> endpoint is used to <b>CREATE</b> a person.
+	 * <br>
+	 * The <b>PUT</b> <i>/person</i> endpoint is used to <b>UPDATE</b> a person.
+	 * <br>
+	 * The <b>DELETE</b> <i>/person/{firstNameAndlastName}</i> endpoint is used to
+	 * <b>DELETE</b> a specific person. <br>
+	 * <br>
+	 * The {@link PersonCRUDController} use a service layer to get all the data
+	 * {@link PersonCRUDService}.<br>
+	 * It also use an {@link ObjectMapper} and the {@link Filters} class for the
+	 * response.
+	 */
 
 	@Autowired
 	private PersonCRUDService personCRUDService;

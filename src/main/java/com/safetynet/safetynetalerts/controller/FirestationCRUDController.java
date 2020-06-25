@@ -24,7 +24,25 @@ import com.safetynet.safetynetalerts.service.object.FirestationCRUDObject;
 @RestController
 public class FirestationCRUDController {
 
-	// CRUD operations on /firestation
+	/**
+	 * Rest controller for <b>CRUD</b> operations on /firestation. <br>
+	 * <br>
+	 * The <b>GET</b> <i>/firestation/</i> endpoint is used to <b>READ</b> all the
+	 * firestations. <br>
+	 * The <b>GET</b> <i>/firestation/{address}</i> endpoint is used to <b>READ</b>
+	 * a specific firestation. <br>
+	 * The <b>POST</b> <i>/firestation</i> endpoint is used to <b>CREATE</b> a
+	 * firestation. <br>
+	 * The <b>PUT</b> <i>/firestation</i> endpoint is used to <b>UPDATE</b> a
+	 * firestation. <br>
+	 * The <b>DELETE</b> <i>/firestation/{address}</i> endpoint is used to
+	 * <b>DELETE</b> a specific firestation. <br>
+	 * <br>
+	 * The {@link FirestationCRUDController} use a service layer to get all the data
+	 * {@link FirestationCRUDService}.<br>
+	 * It also use an {@link ObjectMapper} and the {@link Filters} class for the
+	 * response.
+	 */
 
 	@Autowired
 	private FirestationCRUDService firestationCRUDService;

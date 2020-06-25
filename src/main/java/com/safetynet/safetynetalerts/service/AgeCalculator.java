@@ -11,10 +11,11 @@ import java.util.List;
 public class AgeCalculator {
 
 	/**
-	 * Calculate the age of a person from the date of birth.
+	 * Calculate the age of a person from the date of birth.<br>
+	 * The count of children, adults and the age of the person are accessible via
+	 * getters.
 	 * 
-	 * @param birthDate ,from the JSON file. The count of children, adults and the
-	 *                  age of the person are accessible via getters.
+	 * @param birthDate from the JSON file.
 	 */
 
 	private long children = 0;

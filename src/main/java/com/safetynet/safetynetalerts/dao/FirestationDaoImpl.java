@@ -12,21 +12,22 @@ import com.safetynet.safetynetalerts.service.JSONReader;
 public class FirestationDaoImpl implements FirestationDAO {
 
 	/**
-	 * Implementation of the interface {@link FirestationDAO} used to define CRUD
+	 * Implementation of the interface {@link FirestationDAO} used to define
 	 * operations for the type {@link Firestation}.
 	 * 
-	 * @Method findAll() is used to get all the firestations present in the
+	 * @Method findAll() is used to <b>GET</b> all the firestations present in the
 	 *         data.json file, return type: {@link List}<{@link Firestation}>.
 	 * @Method findById() is used to return a specific {@link Firestation} if
 	 *         present in the data.json file, else return null.
-	 * @Method findAddressByStation() is used to get all the firestations present in
-	 *         the data.json file who match the parameter, return type:
+	 * @Method findAddressByStation() is used to <b>GET</b> all the firestations
+	 *         present in the data.json file who match the parameter, return type:
 	 *         {@link List}<{@link Firestation}>.
-	 * @Method save() is used to add a new firestation, return type:
+	 * @Method save() is used to <b>CREATE</b> a new firestation, return type:
 	 *         {@link List}<{@link Firestation}>.
-	 * @Method update() is used to update a specific firestation, return
+	 * @Method update() is used to <b>UPDATE</b> a specific firestation, return
 	 *         type:{@link Firestation}.
-	 * @Method delete() is used to delete a specific firestation, return type: void.
+	 * @Method delete() is used to <b>DELETE</b> a specific firestation, return
+	 *         type: void.
 	 */
 
 	private List<Firestation> firestations;

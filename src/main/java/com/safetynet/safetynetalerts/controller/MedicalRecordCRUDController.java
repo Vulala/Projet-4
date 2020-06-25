@@ -24,7 +24,25 @@ import com.safetynet.safetynetalerts.service.object.MedicalRecordCRUDObject;
 @RestController
 public class MedicalRecordCRUDController {
 
-	// CRUD operations on /medicalRecord
+	/**
+	 * Rest controller for <b>CRUD</b> operations on /medicalRecord. <br>
+	 * <br>
+	 * The <b>GET</b> <i>/medicalRecord</i> endpoint is used to <b>READ</b> all the
+	 * medical records. <br>
+	 * The <b>GET</b> <i>/medicalRecord/{firstNameAndlastName}</i> endpoint is used
+	 * to <b>READ</b> a specific medical record. <br>
+	 * The <b>POST</b> <i>/medicalRecord</i> endpoint is used to <b>CREATE</b> a
+	 * medical record. <br>
+	 * The <b>PUT</b> <i>/medicalRecord</i> endpoint is used to <b>UPDATE</b> a
+	 * medical record. <br>
+	 * The <b>DELETE</b> <i>/medicalRecord/{firstNameAndlastName}</i> endpoint is
+	 * used to <b>DELETE</b> a specific medical record. <br>
+	 * <br>
+	 * The {@link MedicalRecordCRUDController} use a service layer to get all the
+	 * data {@link MedicalRecordCRUDService}.<br>
+	 * It also use an {@link ObjectMapper} and the {@link Filters} class for the
+	 * response.
+	 */
 
 	@Autowired
 	private MedicalRecordCRUDService medicalRecordCRUDService;

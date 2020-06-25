@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.safetynet.safetynetalerts.controller.PersonCRUDController;
 import com.safetynet.safetynetalerts.dao.PersonDAO;
 import com.safetynet.safetynetalerts.model.Person;
 import com.safetynet.safetynetalerts.service.object.PersonCRUDObject;
@@ -14,7 +15,14 @@ import com.safetynet.safetynetalerts.service.object.PersonCRUDObject;
 public class PersonCRUDService {
 
 	/**
-	 * Service used to interact with the DAO layer
+	 * Service used to interact with the DAO layer.<br>
+	 * <br>
+	 * This {@link PersonCRUDService} is specific for the requests from the
+	 * {@link PersonCRUDController}.<br>
+	 * It get the requests from the {@link PersonCRUDController} and return the data
+	 * into a specific {@link PersonCRUDObject}.<br>
+	 * <br>
+	 * This service make use of the {@link PersonDAO} interface.<br>
 	 */
 
 	@Autowired

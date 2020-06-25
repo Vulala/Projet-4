@@ -15,8 +15,8 @@ public class PersonDaoImpl implements PersonDAO {
 	 * Implementation of the interface {@link PersonDAO} used to define operations
 	 * for the type {@link Person}.
 	 * 
-	 * @Method findAll() is used to get all the persons present in the data.json
-	 *         file, return type: {@link List}<{@link Person}>.
+	 * @Method findAll() is used to <b>GET</b> all the persons present in the
+	 *         data.json file, return type: {@link List}<{@link Person}>.
 	 * @Method findById() is used to return a specific {@link Person} if present in
 	 *         the data.json file, else return null.
 	 * @Method findByLastName() is used to return a {@link List}<{@link Person}>
@@ -25,11 +25,12 @@ public class PersonDaoImpl implements PersonDAO {
 	 *         depending of the parameter.
 	 * @Method findEmailByCity() is used to return {@link List}<{@link Person}>
 	 *         depending of the parameter.
-	 * @Method save() is used to add a new person, return type:
+	 * @Method save() is used to <b>CREATE</b> a new person, return type:
 	 *         {@link List}<{@link Person}>.
-	 * @Method update() is used to update a specific person, return type:
+	 * @Method update() is used to <b>UPDATE</b> a specific person, return type:
 	 *         {@link Person}.
-	 * @Method delete() is used to delete a specific person, return type: void.
+	 * @Method delete() is used to <b>DELETE</b> a specific person, return type:
+	 *         void.
 	 */
 
 	private List<Person> persons;

@@ -15,20 +15,20 @@ public class MedicalRecordDaoImpl implements MedicalRecordDAO {
 	 * Implementation of the interface {@link MedicalRecordDAO} used to define
 	 * operations for the type {@link MedicalRecord}.
 	 * 
-	 * @Method findAll() is used to get all the medical records present in the
-	 *         data.json file, return type: {@link List}<{@link MedicalRecord}>.
+	 * @Method findAll() is used to <b>GET</b> all the medical records present in
+	 *         the data.json file, return type: {@link List}<{@link MedicalRecord}>.
 	 * @Method findById() is used to return a specific {@link MedicalRecord} if
 	 *         present in the data.json file, else return null.
 	 * @Method findByFirstName() is used to return a specific {@link MedicalRecord}
 	 *         if present in the data.json file, else return null.
 	 * @Method findByLastName() is used to return a specific
 	 *         {@link List}<{@link MedicalRecord}> depending of the parameter.
-	 * @Method save() is used to add a new medical record, return type:
+	 * @Method save() is used to <b>CREATE</b> a new medical record, return type:
 	 *         {@link List}<{@link MedicalRecord}>.
-	 * @Method update() is used to update a specific medical record, return type:
-	 *         {@link MedicalRecord}.
-	 * @Method delete() is used to delete a specific medical record, return type:
-	 *         void.
+	 * @Method update() is used to <b>UPDATE</b> a specific medical record, return
+	 *         type: {@link MedicalRecord}.
+	 * @Method delete() is used to <b>DELETE</b> a specific medical record, return
+	 *         type: void.
 	 */
 
 	private List<MedicalRecord> medicalRecords;

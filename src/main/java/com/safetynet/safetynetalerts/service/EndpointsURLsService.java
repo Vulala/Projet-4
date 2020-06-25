@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tinylog.Logger;
 
+import com.safetynet.safetynetalerts.controller.EndpointsURLsController;
 import com.safetynet.safetynetalerts.dao.FirestationDAO;
 import com.safetynet.safetynetalerts.dao.MedicalRecordDAO;
 import com.safetynet.safetynetalerts.dao.PersonDAO;
@@ -19,7 +20,18 @@ import com.safetynet.safetynetalerts.service.object.EndpointsURLsObject;
 public class EndpointsURLsService {
 
 	/**
-	 * Service used to interact with the DAO layer
+	 * Service used to interact with the DAO layer.<br>
+	 * <br>
+	 * This {@link EndpointsURLsService} is specific for the requests from the
+	 * {@link EndpointsURLsController}.<br>
+	 * It get the requests from the {@link EndpointsURLsController} and return the
+	 * data into a specific {@link EndpointsURLsObject}.<br>
+	 * <br>
+	 * This service make use of the three DAO interfaces. {@link PersonDAO},
+	 * {@link FirestationDAO}, {@link MedicalRecordDAO}.<br>
+	 * It also use the {@link AgeCalculator} class to retrieve the age of a person
+	 * and the number of children, adults.<br>
+	 * <br>
 	 */
 
 	@Autowired
